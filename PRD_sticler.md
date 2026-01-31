@@ -5,7 +5,7 @@
 Sticler is a 3D stylized tower defense/conquest game where players fly around a **hex-sphere globe**, build organic-looking defenses using an Oscar Stalberg-style dual-grid system, and battle a **strategic AI opponent**. This Phase 1 PRD delivers a **visually stunning playable prototype** with: full hex-sphere world, Stalberg's organic mesh deformation, Vercidium's hyper-optimized voxel rendering (20,000+ FPS), **6 block types** for strategic depth, **beautiful Hogwarts Legacy-style art assets**, timer-based rounds, attack units with pathfinding, and a **complex AI** that adapts to player strategy.
 
 **Tech Stack:** Bevy (Rust) + wgpu
-**Visual Style:** Stylized Hogwarts Legacy aesthetic (magical, warm, ethereal)
+**Visual Style:** Hearthstone-inspired warm, welcoming aesthetic (cozy, painterly, NO harsh lines)
 
 ## Goals
 
@@ -15,7 +15,7 @@ Deliver a visually stunning, gameplay-complete prototype on a full hex-sphere gl
 **Achieved when:**
 - Hex-sphere globe world with territories player can conquer
 - Player can fly around and place blocks that blend organically (Stalberg style)
-- Beautiful Hogwarts Legacy-style stylized 3D assets
+- Beautiful Hearthstone-style warm, welcoming 3D assets (NO harsh lines)
 - Multiple block types with distinct visual styles
 - Complex AI that strategizes, not just random placement
 - Build phase → Attack phase timer creates tension
@@ -267,32 +267,41 @@ A hex-sphere is created by:
 
 ---
 
-### US-009: Render hex-sphere world
+### US-009: Render hex-sphere world with warm, cozy aesthetic
 **Dependencies:** US-008, US-001
-**Description:** As a player, I want to see a beautiful hex-sphere world I can fly around.
+**Description:** As a player, I want to see a beautiful world that feels welcoming - like a storybook globe.
 
-**Visual Design:**
-- Ethereal, magical globe floating in space
-- Each hex territory subtly outlined
-- Unowned hexes neutral color, owned hexes player-colored
-- Atmospheric glow around the sphere
-- Stars/space background
+**Visual Design - HEARTHSTONE/STORYBOOK FEEL:**
+- Warm, painted-style globe - like a hand-crafted world
+- **NO harsh hex lines** - territories blend naturally like terrain
+- Owned territories have warmer, more vibrant colors
+- Unowned territories are softer, muted (but still friendly)
+- Atmospheric glow: golden hour warmth, sunset sky
+- Background: dreamlike clouds, soft sunset - NOT cold space
 
-**Goal:** Visually stunning world that draws players in.
+**Terrain-Style Ownership:**
+Instead of hex borders, territories look like:
+- Your territory: lush golden-green meadow feel
+- Enemy territory: slightly cooler blue-green meadow
+- Neutral: soft earth tones, peaceful
+- All blend into each other organically at edges
+
+**Goal:** World feels like a cozy storybook you want to explore.
 
 **Acceptance Criteria:**
 - [ ] Create `src/world/render.rs` module
-- [ ] Render hex-sphere as 3D mesh
-- [ ] Each hex face has territory border line (subtle glow)
-- [ ] Hex colors based on ownership (neutral/player1/player2/AI)
-- [ ] Atmospheric shader for magical glow effect
-- [ ] Skybox with stars/nebula background
-- [ ] Camera can orbit and zoom the sphere
-- [ ] Smooth transitions when focusing on a hex
+- [ ] Render hex-sphere as 3D mesh with painterly textures
+- [ ] NO visible hex border lines - territories blend naturally
+- [ ] Territory colors based on ownership (warm gradients)
+- [ ] Atmospheric shader: golden hour glow, soft warmth
+- [ ] Skybox: sunset clouds, dreamy (NOT dark space)
+- [ ] Camera can orbit and zoom with smooth easing
+- [ ] World feels like a tabletop game piece, friendly
+- [ ] Overall impression: "cozy", "inviting", "I want to play there"
 - [ ] Typecheck passes
 - [ ] Verify changes work in browser
 
-**Success looks like:** Beautiful glowing hex-sphere floating in space, can fly around it, hexes visible.
+**Success looks like:** See the world, feel welcomed, want to start building immediately.
 
 ---
 
@@ -486,59 +495,83 @@ Blocks don't just snap together - they MORPH:
 
 ---
 
-### US-017: Implement block placement system
+### US-017: Implement friendly block placement system
 **Dependencies:** US-003, US-015, US-005
-**Description:** As a player, I want to place blocks on the grid so I can build defenses.
+**Description:** As a player, I want to place blocks naturally - without visible grid lines.
 
-**The Feel:**
-- Grid is barely visible, glows when cursor approaches
-- Click to place block at cursor position
-- Block immediately morphs to blend with neighbors
-- Satisfying visual feedback (glow, particle)
-- Pixels deducted from economy
+**The Feel - COZY BUILDING:**
+- **NO grid lines visible** - building feels organic, not technical
+- Ghost block preview appears where you're pointing (soft, golden glow)
+- Preview block has friendly outline (soft, not harsh)
+- Click to place - satisfying "plop" with warm sparkles
+- Blocks morph together like clay being shaped
+- Building feels like crafting, not technical placement
 
-**Goal:** Building feels satisfying - "like sculpting with light."
+**Visual Feedback:**
+- Ghost preview: semi-transparent, warm golden glow
+- Placement: golden dust particles, soft sound
+- Block morphs: smooth animation to blend with neighbors
+- Invalid position: gentle shake (not harsh red X)
+
+**Goal:** Building feels like playing with friendly blocks, not programming a grid.
 
 **Acceptance Criteria:**
 - [ ] Create `src/building/placement.rs`
-- [ ] Ray-cast from camera to find grid intersection
-- [ ] Ghost block preview at valid positions
-- [ ] Grid lines glow near cursor (subtle effect)
+- [ ] Ray-cast from camera to find valid placement position
+- [ ] Ghost block preview with warm, soft glow (not technical outline)
+- [ ] **NO visible grid lines** - blocks just snap to valid positions
 - [ ] Left click places block (if can afford)
-- [ ] Right click removes block (partial refund?)
-- [ ] Block immediately runs Stalberg deformation
+- [ ] Right click removes block (gentle poof, partial refund)
+- [ ] Block immediately runs Stalberg organic deformation
+- [ ] Warm particle effect on placement (golden sparkles)
 - [ ] Economy updated on place/remove
-- [ ] Sound effect placeholder (beep for now)
+- [ ] Sound effect: friendly "plop" (think board game piece)
 - [ ] Typecheck passes
 - [ ] Verify changes work in browser
 
-**Success looks like:** Fly around, see grid glow near you, click to place blocks that blend organically.
+**Success looks like:** Fly around, point at a spot, see friendly ghost block, click to place - feels like playing with toys.
 
 ---
 
-### US-018: Implement hex territory boundaries
+### US-018: Implement soft, organic hex territory boundaries
 **Dependencies:** US-002, US-001
-**Description:** As a player, I want to see my hex territory boundary so I know where I can build.
+**Description:** As a player, I want to subtly see my territory - but NO harsh grid lines.
 
-**Visual Design:**
-- Hex boundary is a subtle glowing line
-- Ethereal, magical feel (Hogwarts aesthetic)
-- Inside is your building area
-- Core (the "B" to protect) is at center
+**Visual Design - SOFT & ORGANIC:**
+- **NO visible grid lines** - the world should feel natural, not technical
+- Territory boundary is organic: think gentle terrain color shift, soft light gradient
+- Like natural landscape zones (grassy area fading to sandy area)
+- Subtle particle effects at edges (drifting golden dust)
+- Core glows warmly - you know your territory by proximity to core
 
-**Goal:** Clear territory ownership with magical aesthetic.
+**Boundary Options (pick best during implementation):**
+1. **Terrain tint shift** - your area has warmer ground tones
+2. **Ambient light pool** - soft light radiates from your core
+3. **Floating particles** - gentle sparkles define your area
+4. **Soft fog/mist** - light mist at territory edges
+
+**What to AVOID:**
+- Hard hexagonal lines
+- Visible grid overlays
+- Tron-style neon boundaries
+- Technical-looking UI elements
+
+**Goal:** Know where your territory is without seeing any lines.
 
 **Acceptance Criteria:**
 - [ ] Create `src/hex/boundary.rs`
-- [ ] Render hex boundary as glowing line mesh
-- [ ] Boundary pulses gently (breathing effect)
-- [ ] Player core rendered at hex center
-- [ ] Core has health bar (visible)
-- [ ] Enemy hex has different colored boundary
+- [ ] Territory ownership visible WITHOUT grid lines
+- [ ] Use soft color gradient, light, or particles (not lines)
+- [ ] Player core rendered at hex center with warm glow
+- [ ] Core glow intensity indicates territory range
+- [ ] Core has health bar (subtle, friendly design)
+- [ ] Enemy territory has different ambient color (cooler tones)
+- [ ] Flying near boundary edge, you sense transition subtly
+- [ ] Screenshot test: should look like natural terrain, not tech grid
 - [ ] Typecheck passes
 - [ ] Verify changes work in browser
 
-**Success looks like:** See your hex with glowing boundary, core in center, enemy hex visible nearby.
+**Success looks like:** You know your territory, enemy territory - but no lines visible. Just feels like natural zones.
 
 ---
 
@@ -630,42 +663,66 @@ Blocks don't just snap together - they MORPH:
 
 ---
 
-### US-022: Create stylized 3D art assets
+### US-022: Create welcoming Hearthstone-style art assets
 **Dependencies:** US-001, US-015
-**Description:** As a player, I want beautiful Hogwarts Legacy-style visuals so the game feels magical.
+**Description:** As a player, I want a warm, welcoming visual world that feels like a cozy game - not technical or harsh.
 
-**Art Direction:**
-- **Style:** Stylized, not realistic. Think Hogwarts Legacy, Townscaper, Ghibli
-- **Colors:** Warm, magical palette with OKLCH colors
-- **Lighting:** Soft, atmospheric with bloom and god rays
-- **Materials:** Slightly translucent, magical glow on edges
-- **Blocks:** Each type has unique visual identity
+**Art Direction - HEARTHSTONE AESTHETIC:**
+- **Style:** Painterly, hand-crafted, soft edges - like Hearthstone's game board world
+- **NO harsh lines** - everything should feel organic, rounded, friendly
+- **Colors:** Warm amber, soft gold, gentle blues - tavern/fantasy warmth
+- **Lighting:** Golden hour glow, soft shadows, firelight warmth
+- **Materials:** Soft gradients, no hard edges, chunky/friendly proportions
+- **Blocks:** Rounded corners, soft bevels, look like carved wood or friendly stone
 
-**Asset List:**
-1. Block meshes (6 types) with proper UV mapping
-2. Core (the "B") - glowing crystal/orb
-3. Attack units (2+ types) - stylized creatures
-4. Hex territory floor/boundary
-5. Particle effects (placement, destruction, magic)
-6. Skybox (magical space/clouds)
+**Reference Games:**
+- Hearthstone (the game board and world, not the cards)
+- Legends of Kingdom Rush
+- Clash Royale arenas
+- Supercell game aesthetics generally
 
-**Goal:** Game looks beautiful from day one, draws players in.
+**The Feeling:**
+> "Like you're playing on a cozy tabletop by a warm fireplace"
+
+**What to AVOID:**
+- Technical-looking grids with harsh lines
+- Cold, sterile, sci-fi aesthetics
+- Sharp geometric edges
+- Minecraft-style pixel look
+- Dark, moody, or intimidating visuals
+
+**Asset Requirements:**
+1. Block meshes (6 types) - chunky, friendly, rounded corners, soft bevels
+2. Core ("B") - warm glowing orb like a friendly campfire
+3. Attack units - cute/charming creatures (not scary)
+4. Hex territory - soft boundaries, no visible grid lines, organic edges
+5. Particles - warm sparkles, golden dust, soft glow
+6. Skybox - sunset/golden hour clouds, soft and dreamlike
+
+**Technical Art Notes:**
+- Use SDF (Signed Distance Field) for soft edges in shaders
+- Outline shaders should be SOFT, not harsh
+- Ambient occlusion should be gentle, not dark
+- Color palette generator: warm OKLCH values (hue 30-60 range)
+
+**Goal:** Game feels welcoming, like sitting down at a friendly game table.
 
 **Acceptance Criteria:**
-- [ ] Create `assets/meshes/` with all block meshes (.glb/.gltf)
-- [ ] Create stylized player core mesh with glow shader
-- [ ] Create attack unit meshes (basic: small creature, heavy: larger)
-- [ ] Create hex territory floor texture with subtle pattern
-- [ ] Implement bloom post-processing effect
-- [ ] Implement god rays / volumetric lighting
-- [ ] Particle system for block placement (sparkles)
-- [ ] Particle system for destruction (fragments + dust)
-- [ ] Magical aura shader for boundaries
-- [ ] Color palette defined (warm + magical)
+- [ ] All block meshes have rounded corners and soft bevels
+- [ ] NO visible harsh grid lines anywhere in the game
+- [ ] Core glows with warm amber light (not cold blue/white)
+- [ ] Attack units look friendly/cute, not threatening
+- [ ] Hex boundaries are INVISIBLE or very subtle organic glow
+- [ ] Overall palette is warm: golds, ambers, soft browns, gentle sky blues
+- [ ] Soft edge shader for all meshes (no hard silhouettes)
+- [ ] Golden hour lighting setup (warm directional, soft ambient)
+- [ ] Particle effects use warm colors (orange, gold, soft white)
+- [ ] Skybox feels like sunset/peaceful sky
+- [ ] Screenshot comparison: should feel like Hearthstone, not Minecraft
 - [ ] Typecheck passes
-- [ ] Verify changes work in browser
+- [ ] Verify in-game: does it feel cozy and welcoming?
 
-**Success looks like:** Game looks like a premium stylized indie title, not a prototype.
+**Success looks like:** Show someone the game, they say "that looks cozy/friendly" not "that looks technical"
 
 ---
 
