@@ -1,8 +1,53 @@
-# Sticler Development Progress
+# Progress Log - sticler
 
-## 2026-01-31 - Project Idea Captured
-- Initial concept documented from sticker_game evolution
-- Core vision: 3D stylized tower defense with organic grid
-- Key references: Oscar Stalberg (Townscaper), Vercidium (voxel optimization)
-- Performance target: 20,000+ FPS
-- Next step: Run /prd to create PRD
+## Phase 1: Playable Prototype
+
+### Scope
+- Single hex territory
+- Full Stalberg dual-grid + mesh deformation
+- Full Vercidium rendering optimizations (20,000+ FPS target)
+- Timer-based rounds (Build → Attack → Resolution)
+- Attack units with pathfinding
+- Simple AI opponent
+- Win/lose conditions
+
+### Learnings
+(Patterns discovered during implementation)
+
+---
+
+## Story Progress
+
+| Story | Status | Notes |
+|-------|--------|-------|
+| US-001 | pending | Bevy + wgpu setup |
+| US-002 | pending | Hex coordinates |
+| US-003 | pending | Dual-grid (Stalberg) |
+| US-004 | pending | Voxel mesh structures |
+| US-005 | pending | Pixel economy |
+| US-006 | pending | Game state machine |
+| US-007 | pending | Attack unit structures |
+| US-008 | pending | Foundation validation |
+| US-009 | pending | Greedy meshing |
+| US-010 | pending | GPU instancing |
+| US-011 | pending | Indirect rendering |
+| US-012 | pending | SSBO mesh storage |
+| US-013 | pending | Stalberg deformation |
+| US-014 | pending | Rendering validation |
+| US-015 | pending | Block placement |
+| US-016 | pending | Hex boundaries |
+| US-017 | pending | Phase timer UI |
+| US-018 | pending | Economy UI |
+| US-019 | pending | Gameplay validation |
+| US-020 | pending | Unit spawning |
+| US-021 | pending | Pathfinding |
+| US-022 | pending | Combat resolution |
+| US-023 | pending | Simple AI |
+| US-024 | pending | Win/lose conditions |
+| US-025 | pending | Combat validation |
+| US-026 | pending | Benchmark scene |
+| US-027 | pending | Main menu |
+| US-028 | pending | Audio feedback |
+| US-029 | pending | Final validation |
+
+---
