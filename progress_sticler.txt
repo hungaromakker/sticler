@@ -1,0 +1,8 @@
+# Sticler Development Progress
+
+## 2026-01-31 - Project Idea Captured
+- Initial concept documented from sticker_game evolution
+- Core vision: 3D stylized tower defense with organic grid
+- Key references: Oscar Stalberg (Townscaper), Vercidium (voxel optimization)
+- Performance target: 20,000+ FPS
+- Next step: Run /prd to create PRD

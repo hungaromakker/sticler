@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+venv/
+.venv/
+.env
+.env.local
+
+# Node
+node_modules/
+bun.lockb
+
+# Rust
+target/
+Cargo.lock
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build artifacts
+dist/
+build/
+
+# Logs
+*.log
+logs/
+
+# Runtime state (MagicM)
+.magicm/
